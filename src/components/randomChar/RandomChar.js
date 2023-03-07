@@ -17,7 +17,7 @@ class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        this.timerID = setInterval(this.updateChar, 60000);
+        // this.timerID = setInterval(this.updateChar, 15000);
     }
 
     componentWillUnmount() {
@@ -65,8 +65,8 @@ class RandomChar extends Component {
                     <p className="randomchar__title">
                         Or choose another one
                     </p>
-                    <button className="button button__main">
-                        <div className="inner">try it</div>
+                    <button onClick={this.updateChar} className="button button__main">
+                        <div className="inner" >try it</div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
                 </div>
