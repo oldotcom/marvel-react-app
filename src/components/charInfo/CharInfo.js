@@ -13,6 +13,18 @@ class CharInfo extends Component {
 
     marvelService = new MarvelService();
 
+    updateChar = () => {
+        const {charId} = this.props;
+        if (!charId) {
+            return
+        }
+
+        this.marvelService
+            .getCharacter(charId)
+            .then()
+            .catch()
+    }
+
     render() {
         return (
             <div className="char__info">
