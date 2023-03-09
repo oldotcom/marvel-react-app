@@ -1,5 +1,10 @@
 import { Component } from 'react';
+
 import MarvelService from '../../services/MarvelService';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Skeleton from '../skeleton/Skeleton';
+
 import './charInfo.scss';
 import thor from '../../resources/img/thor.jpeg';
 
@@ -51,9 +56,19 @@ class CharInfo extends Component {
     }
 
     render() {
+        const {char, loading, error} = this.state;
+
+        const skeleton = char || loading || error ? null : <Skeleton/>;
+        const errorMessage = error ? <ErrorMessage/> : null;
+        const spinner = loading ? <Spinner/> : null;
+        const content = !(loading || error || !char) ? <View char={char}/> : null;
+
         return (
             <div className="char__info">
-                
+                {skeleton}
+                {errorMessage}
+                {spinner}
+                {content}
             </div>
         )
     }
