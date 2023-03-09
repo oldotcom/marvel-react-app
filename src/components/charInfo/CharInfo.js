@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import MarvelService from '../../services/MarvelService';
 import './charInfo.scss';
 import thor from '../../resources/img/thor.jpeg';
 
