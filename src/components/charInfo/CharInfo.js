@@ -7,7 +7,7 @@ class CharInfo extends Component {
 
     state = {
         char: {},
-        loading: true,
+        loading: false,
         error: false
     }
 
@@ -19,10 +19,31 @@ class CharInfo extends Component {
             return
         }
 
+        this.onCharLoading();
         this.marvelService
             .getCharacter(charId)
-            .then()
-            .catch()
+            .then(this.onCharLoaded)
+            .catch(this.onError)
+    }
+
+    onCharLoaded = (char) => {
+        this.setState({
+            char,
+            loading: false
+        })
+    }
+
+    onCharLoading = () => {
+        this.setState({
+            loading: true
+        })
+    }
+
+    onError = () => {
+        this.setState({
+            loading: false,
+            error: true
+        })
     }
 
     render() {
