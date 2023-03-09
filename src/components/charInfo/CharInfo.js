@@ -11,7 +11,7 @@ import thor from '../../resources/img/thor.jpeg';
 class CharInfo extends Component {
 
     state = {
-        char: {},
+        char: null,
         loading: false,
         error: false
     }
