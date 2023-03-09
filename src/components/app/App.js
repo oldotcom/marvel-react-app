@@ -7,8 +7,15 @@ import CharInfo from "../charInfo/CharInfo";
 import decoration from '../../resources/img/vision.png';
 
 class App extends Component {
+    
     state = {
         selectedChar: null
+    }
+
+    onCharSelected = (id) => {
+        this.setState({
+            selectedChar: id
+        })
     }
 
     render() {
