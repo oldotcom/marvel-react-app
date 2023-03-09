@@ -1,12 +1,14 @@
 import { Component } from 'react';
 import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
 
 import './charList.scss';
 class CharList extends Component {
     state = {
         charlist: [],
-        loading: true
+        loading: true,
+        error: false
     }
 
     marvelService = new MarvelService();
@@ -14,12 +16,20 @@ class CharList extends Component {
     componentDidMount() {
         this.marvelService.getAllCharacters()
             .then(this.onCharListLoaded)
+            .catch(this.onError)
     }
 
     onCharListLoaded = (charlist) => {
         this.setState({
             charlist,
             loading: false
+        })
+    }
+
+    onError = () => {
+        this.state({
+            loading: false,
+            error: true
         })
     }
 
@@ -44,16 +54,17 @@ class CharList extends Component {
     }
 
     render() {
-        const {charlist, loading} = this.state;
+        const {charlist, loading, error} = this.state;
 
         const items = this.renderItems(charlist);
 
+        const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spinner/> : null;
-        const content = !loading ? items : null;
-        console.log(loading);
+        const content = !(loading || error) ? items : null;
 
         return (
             <div className="char__list">
+                {errorMessage}
                 {spinner}
                 {content}
                 <button className="button button__main button__long">
