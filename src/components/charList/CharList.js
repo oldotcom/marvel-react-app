@@ -1,10 +1,12 @@
 import { Component } from 'react';
+import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 
 import './charList.scss';
 class CharList extends Component {
     state = {
-        charlist: []
+        charlist: [],
+        loading: true
     }
 
     marvelService = new MarvelService();
@@ -15,7 +17,10 @@ class CharList extends Component {
     }
 
     onCharListLoaded = (charlist) => {
-        this.setState({charlist})
+        this.setState({
+            charlist,
+            loading: false
+        })
     }
 
     renderItems(arr) {
@@ -39,12 +44,18 @@ class CharList extends Component {
     }
 
     render() {
-        const {charlist} = this.state;
-        const items = this.renderItems(charlist)
+        const {charlist, loading} = this.state;
+
+        const items = this.renderItems(charlist);
+
+        const spinner = loading ? <Spinner/> : null;
+        const content = !loading ? items : null;
+        console.log(loading);
 
         return (
             <div className="char__list">
-                {items}
+                {spinner}
+                {content}
                 <button className="button button__main button__long">
                     <div className="inner">load more</div>
                 </button>
