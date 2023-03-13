@@ -8,7 +8,8 @@ class CharList extends Component {
     state = {
         charlist: [],
         loading: true,
-        error: false
+        error: false,
+        newItemLoading: false
     }
 
     marvelService = new MarvelService();
@@ -18,15 +19,23 @@ class CharList extends Component {
     }
 
     onRequest = (offset) => {
+        this.onCharListLoading();
         this.marvelService.getAllCharacters(offset)
         .then(this.onCharListLoaded)
         .catch(this.onError)
     }
 
+    onCharListLoading = () => {
+        this.setState({
+            newItemLoading: true
+        })
+    }
+
     onCharListLoaded = (charlist) => {
         this.setState({
             charlist,
-            loading: false
+            loading: false,
+            newItemLoading: false
         })
     }
 
