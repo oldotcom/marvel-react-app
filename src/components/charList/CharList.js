@@ -10,7 +10,7 @@ class CharList extends Component {
         loading: true,
         error: false,
         newItemLoading: false,
-        offset: 1600,
+        offset: 210,
         charEnded: false
     }
 
@@ -81,7 +81,7 @@ class CharList extends Component {
     }
 
     render() {
-        const {charlist, loading, error, newItemLoading, offset} = this.state;
+        const {charlist, loading, error, newItemLoading, offset, charEnded} = this.state;
 
         const items = this.renderItems(charlist);
 
@@ -97,6 +97,7 @@ class CharList extends Component {
                 <button 
                     className="button button__main button__long"
                     disabled={newItemLoading}
+                    style={{'display' : charEnded ? 'none' : 'block'}}
                     onClick={() => this.onRequest(offset)}>
                     <div className="inner">load more</div>
                 </button>
