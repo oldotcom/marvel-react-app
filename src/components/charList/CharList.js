@@ -31,12 +31,12 @@ class CharList extends Component {
         })
     }
 
-    onCharListLoaded = (charlist) => {
-        this.setState({
-            charlist,
-            loading: false,
-            newItemLoading: false
-        })
+    onCharListLoaded = (newCharlist) => {
+        this.setState(({charlist}) => ({
+                charlist: [...charlist, ...newCharlist],
+                loading: false,
+                newItemLoading: false
+        }))
     }
 
     onError = () => {
