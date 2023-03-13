@@ -74,7 +74,7 @@ class CharList extends Component {
     }
 
     render() {
-        const {charlist, loading, error} = this.state;
+        const {charlist, loading, error, newItemLoading, offset} = this.state;
 
         const items = this.renderItems(charlist);
 
@@ -87,7 +87,10 @@ class CharList extends Component {
                 {errorMessage}
                 {spinner}
                 {content}
-                <button className="button button__main button__long">
+                <button 
+                    className="button button__main button__long"
+                    disabled={newItemLoading}
+                    onClick={() => this.onRequest(offset)}>
                     <div className="inner">load more</div>
                 </button>
             </div>
