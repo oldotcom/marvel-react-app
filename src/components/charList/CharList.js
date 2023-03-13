@@ -9,7 +9,8 @@ class CharList extends Component {
         charlist: [],
         loading: true,
         error: false,
-        newItemLoading: false
+        newItemLoading: false,
+        offset: 210
     }
 
     marvelService = new MarvelService();
@@ -32,10 +33,11 @@ class CharList extends Component {
     }
 
     onCharListLoaded = (newCharlist) => {
-        this.setState(({charlist}) => ({
+        this.setState(({offset, charlist}) => ({
                 charlist: [...charlist, ...newCharlist],
                 loading: false,
-                newItemLoading: false
+                newItemLoading: false,
+                offset: offset + 9
         }))
     }
 
