@@ -57,6 +57,12 @@ class CharList extends Component {
         })
     }
 
+    itemRefs = [];
+
+    setRef = ref => {
+        this.itemRefs.push(ref);
+    }
+
     renderItems(arr) {
         const items = arr.map((item) => {
             let imgStyle = {'objectFit' : 'cover'};
@@ -69,6 +75,7 @@ class CharList extends Component {
                     className="char__item"
                     tabIndex={0}
                     key={item.id}
+                    ref={this.setRef}
                     onClick={() => this.props.onCharSelected(item.id)}
                     onKeyPress={(e) => {
                         if (e.key === " " || e.key === "Enter") {
